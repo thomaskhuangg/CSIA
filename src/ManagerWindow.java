@@ -1,11 +1,8 @@
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.*;
 
 public class ManagerWindow extends JPanel
         implements ActionListener {
@@ -24,7 +21,7 @@ public class ManagerWindow extends JPanel
 
         fc = new JFileChooser();
         fc.setDialogTitle("File Manager");
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         buttonPanel = new JPanel();
         log = new JTextArea(5, 20);
@@ -117,7 +114,7 @@ public class ManagerWindow extends JPanel
                 } catch (IllegalArgumentException iae) {
                     System.out.println("File not found");
                 }
-                createAndShowGUI();
+                CreateAndShowGUI();
             }
         } else if (e.getSource() == saveButton) {
             dispose();
@@ -140,11 +137,11 @@ public class ManagerWindow extends JPanel
                     e1.printStackTrace();
                 }
             }
-            createAndShowGUI();
+            CreateAndShowGUI();
         }
     }
 
-    public static void createAndShowGUI() {
+    public static void CreateAndShowGUI() {
 
         String windows = UIManager.getSystemLookAndFeelClassName();
         try {

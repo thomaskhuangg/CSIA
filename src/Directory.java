@@ -53,10 +53,10 @@ public class Directory extends JFrame
 
         if (e.getSource() == manager) {
             dispose();
-            ManagerWindow.createAndShowGUI();
+            ManagerWindow.CreateAndShowGUI();
         } else if (e.getSource() == fill) {
             dispose();
-            AutoFillWindow.createAndShowGUI();
+            AutoFillWindow.CreateAndShowGUI();
         } else if (e.getSource() == aboutManager) {
             About.helpManager();
         } else if (e.getSource() == aboutFill) {
