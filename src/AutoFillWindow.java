@@ -7,6 +7,7 @@ public class AutoFillWindow extends JPanel
         implements ActionListener {
 
     public AutoFillWindow() {
+
         super(new BorderLayout());
 
 
