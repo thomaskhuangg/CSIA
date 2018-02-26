@@ -1,6 +1,7 @@
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -15,9 +16,6 @@ public class ManagerWindow extends JPanel
     private JTextField path;
     private JFileChooser fc;
     private JLabel fileName, date, size;
-    private File currentFile;
-    private FileSystemView fileSystemView;
-
 
     public ManagerWindow() {
 
@@ -83,7 +81,6 @@ public class ManagerWindow extends JPanel
         if (e.getSource() == openButton) {
             int returnVal = fc.showOpenDialog(ManagerWindow.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-
                 File file = fc.getSelectedFile();
                 String filePath = file.getAbsolutePath();
 
@@ -100,10 +97,11 @@ public class ManagerWindow extends JPanel
                 }
             }
         } else if (e.getSource() == saveButton)
-
         {
             int returnVal = fc.showSaveDialog(ManagerWindow.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
+             File file = fc.getSelectedFile();
+
             }
         }
     }

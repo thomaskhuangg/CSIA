@@ -56,6 +56,7 @@ public class Directory extends JFrame
             ManagerWindow.createAndShowGUI();
         } else if (e.getSource() == fill) {
             dispose();
+            AutoFillWindow.createAndShowGUI();
         } else if (e.getSource() == aboutManager) {
             About.helpManager();
         } else if (e.getSource() == aboutFill) {
