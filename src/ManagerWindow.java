@@ -3,26 +3,65 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.*;
 
 public class ManagerWindow extends JPanel
         implements ActionListener {
 
-    JButton openButton, saveButton;
+    private JPanel buttonPanel, fileDetails, fileLabels, fileValues;
+    private JButton openButton, saveButton;
     JTextArea log;
-    JFileChooser fc;
+    private JTextField path;
+    private JFileChooser fc;
+    private JLabel fileName, date, size;
+    private File currentFile;
+    private FileSystemView fileSystemView;
+
 
     public ManagerWindow() {
+
         super(new BorderLayout());
-
-        log = new JTextArea(5, 20);
-        log.setMargin(new Insets(5, 5, 5, 5));
-        log.setEditable(false);
-        JScrollPane logScrollPane = new JScrollPane(log);
-
         fc = new JFileChooser();
         fc.setDialogTitle("File Manager");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        buttonPanel = new JPanel();
+        log = new JTextArea(5, 20);
+        log.setMargin(new Insets (5, 5, 5, 5));
+        log.setEditable(false);
+        JScrollPane logScrollPane = new JScrollPane(log);
+
+        fileDetails = new JPanel(new BorderLayout(10, 10));
+        fileDetails.setBorder(new EmptyBorder(0, 6, 0, 6));
+
+        fileLabels = new JPanel(new GridLayout(0, 1, 5, 5));
+        fileDetails.add(fileLabels, BorderLayout.WEST);
+
+        fileValues = new JPanel(new GridLayout(0, 1, 5, 5));
+        fileDetails.add(fileValues, BorderLayout.CENTER);
+
+        fileLabels.add(new JLabel("File", JLabel.TRAILING));
+        fileName = new JLabel();
+        fileValues.add(fileName);
+        fileLabels.add(new JLabel("Path", JLabel.TRAILING));
+        path = new JTextField(5);
+        path.setEditable(false);
+        fileValues.add(path);
+        fileLabels.add(new JLabel("Last Modified", JLabel.TRAILING));
+        date = new JLabel();
+        fileValues.add(date);
+        fileLabels.add(new JLabel("Size", JLabel.TRAILING));
+        size = new JLabel();
+        fileValues.add(size);
+
+        int count = fileLabels.getComponentCount();
+        for(int i = 0; i < count; i++){
+            fileLabels.getComponent(i).setEnabled(false);
+        }
+
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
 
         openButton = new JButton("Open a File...");
         openButton.addActionListener(this);
@@ -36,6 +75,7 @@ public class ManagerWindow extends JPanel
 
         add(buttonPanel, BorderLayout.PAGE_START);
         add(logScrollPane, BorderLayout.CENTER);
+        add(fileDetails, BorderLayout.PAGE_END);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -55,7 +95,6 @@ public class ManagerWindow extends JPanel
                     e1.printStackTrace();
                 }
                 try {
-                    log.append("Saving: " + file.getName() + "." + "\n");
                 } catch (IllegalArgumentException iae) {
                     System.out.println("File not found");
                 }
@@ -65,13 +104,9 @@ public class ManagerWindow extends JPanel
         {
             int returnVal = fc.showSaveDialog(ManagerWindow.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = fc.getSelectedFile();
-                log.append("Saving: " + file.getName() + "." + "\n");
             }
         }
-
     }
-
 
     public static void createAndShowGUI() {
 

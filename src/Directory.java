@@ -15,40 +15,37 @@ public class Directory extends JFrame
 
 
     public Directory() {
+            panel = new JPanel(new FlowLayout());
+            panel.setBorder(new EmptyBorder(80, 10, 50, 10));
 
-        super("Directory");
+            menuBar = new JMenuBar();
+            menu = new JMenu("About");
+            aboutManager = new JMenuItem("About the File Manager...");
+            aboutManager.addActionListener(this);
+            aboutManager.setActionCommand("managerHelp");
+            aboutFill = new JMenuItem("About the AutoFill...");
+            aboutFill.addActionListener(this);
+            aboutFill.setActionCommand("fillHelp");
+            menu.add(aboutManager);
+            menu.add(aboutFill);
+            menuBar.add(menu);
 
-        panel = new JPanel(new FlowLayout());
-        panel.setBorder(new EmptyBorder(80, 10, 50, 10));
+            manager = new JButton("File Manager");
+            manager.addActionListener(this);
+            manager.setActionCommand("manager");
+            manager.setPreferredSize(new Dimension(250, 150));
 
-        menuBar = new JMenuBar();
-        menu = new JMenu("About");
-        aboutManager = new JMenuItem("About the File Manager...");
-        aboutManager.addActionListener(this);
-        aboutManager.setActionCommand("managerHelp");
-        aboutFill = new JMenuItem("About the AutoFill...");
-        aboutFill.addActionListener(this);
-        aboutFill.setActionCommand("fillHelp");
-        menu.add(aboutManager);
-        menu.add(aboutFill);
-        menuBar.add(menu);
-        setJMenuBar(menuBar);
+            fill = new JButton("AutoFill");
+            fill.addActionListener(this);
+            fill.setActionCommand("fill");
+            fill.setPreferredSize(new Dimension(250, 150));
 
-        manager = new JButton("File Manager");
-        manager.addActionListener(this);
-        manager.setActionCommand("manager");
-        manager.setPreferredSize(new Dimension(250, 150));
-
-        fill = new JButton("AutoFill");
-        fill.addActionListener(this);
-        fill.setActionCommand("fill");
-        fill.setPreferredSize(new Dimension(250, 150));
-
-        panel.add(manager);
-        panel.add(Box.createHorizontalStrut(25));
-        panel.add(fill);
-        add(panel);
-        revalidate();
+            setJMenuBar(menuBar);
+            panel.add(manager);
+            panel.add(Box.createHorizontalStrut(25));
+            panel.add(fill);
+            add(panel);
+            revalidate();
     }
 
 
@@ -81,6 +78,7 @@ public class Directory extends JFrame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setVisible(true);
+
     }
 
 }
