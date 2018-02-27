@@ -8,7 +8,7 @@ public class AutoFillWindow extends JPanel
 
     private JPanel namePanel, toolPanel;
     private JLabel name;
-    private JButton create, delete, rename;
+    private JButton back, create, delete, rename;
     private JTextArea log;
 
     public AutoFillWindow() {
@@ -23,12 +23,15 @@ public class AutoFillWindow extends JPanel
         namePanel.add(name);
 
         toolPanel = new JPanel(new GridLayout(1, 0, 5, 5));
+        back = new JButton("Back");
+        back.addActionListener(this);
         create = new JButton("Create");
         create.addActionListener(this);
         delete = new JButton("Delete");
         delete.addActionListener(this);
         rename = new JButton("Rename");
         rename.addActionListener(this);
+        toolPanel.add(back);
         toolPanel.add(create);
         toolPanel.add(delete);
         toolPanel.add(rename);
@@ -54,6 +57,12 @@ public class AutoFillWindow extends JPanel
         if (e.getSource() == create) {
             dispose();
             CreateTemplate.CreateAndShowGUI();
+        }
+        if(e.getSource() == back){
+            dispose();
+            String[] arguments = new String[]{"123"};
+            Directory.main(arguments);
+            return;
         }
 
     }
